@@ -4,9 +4,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Discord.js-5865F2?style=for-the-badge&logo=discord&logoColor=white"/>
   <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white"/>
-  <img src="https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black"/>
 </p>
 
 <p align="center">
@@ -16,8 +15,8 @@
 </p>
 
 <p align="center">
-  <strong>Sıfırdan yapılandırmaya zaman harcama — hemen yazmaya başla.</strong><br/>
-  Üretime hazır TypeScript başlangıç şablonu.
+  <strong>TypeScript kullanmak isteyenler için boş Discord bot altyapısı.</strong><br/>
+  Komut, event handler ve utils yapısıyla hazır başlangıç şablonu.
 </p>
 
 </div>
@@ -26,18 +25,19 @@
 
 ## 📖 Genel Bakış
 
-**typescript-temp**, her yeni TypeScript projesinde tekrar tekrar aynı yapılandırmaları kurmaktan kurtaran hazır bir şablondur. ESLint, Prettier ve tip güvenliği baştan ayarlanmış olarak gelir.
+**typescript-temp**, Discord botu geliştirmek isteyenler için TypeScript ile hazırlanmış sade ve genişletilebilir bir başlangıç şablonudur. Slash komutları, event handler'lar ve modüler utils yapısıyla hemen geliştirmeye başlayabilirsin.
 
 ---
 
 ## ✨ Özellikler
 
-- ✅ Sıkı TypeScript yapılandırması (`strict: true`)
-- 🔍 ESLint entegrasyonu — kod kalitesi garantisi
-- 💅 Prettier — tutarlı kod formatı
-- 🚀 Anında kullanıma hazır proje yapısı
-- 🧪 Test altyapısı desteğine hazır
-- 📦 Modüler ve genişletilebilir mimari
+- ⚡ Discord.js v14 + TypeScript desteği
+- 🗂️ Modüler komut yapısı
+- 📡 Event handler sistemi
+- 🔧 Slash komutlarını otomatik kaydet (`registerCommands.ts`)
+- 🔌 Event'leri otomatik yükle (`registerEvents.ts`)
+- 🔒 Tam TypeScript tip güvenliği
+- 🪶 Sade ve kolayca genişletilebilir yapı
 
 ---
 
@@ -46,31 +46,47 @@
 | Teknoloji | Amaç |
 |---|---|
 | TypeScript | Dil |
+| Discord.js | Discord API Kütüphanesi |
 | Node.js | Çalışma Ortamı |
-| ESLint | Kod Kalitesi |
-| Prettier | Kod Formatlama |
 
 ---
 
 ## 🚀 Başlarken
 
+### Gereksinimler
+- Node.js `>= 18.x`
+- [Discord Developer Portal](https://discord.com/developers/applications) üzerinden bir bot token'ı
+
+### Kurulum
+
 ```bash
 git clone https://github.com/abdulrahmanqdev/typescript-temp.git
 cd typescript-temp
 npm install
-npm run dev
 ```
 
-### Derleme
+### Yapılandırma
 
-```bash
-npm run build
+`src/config.ts` dosyasına bot bilgilerini gir:
+
+```ts
+export default {
+  token: "BOT_TOKEN_BURAYA",
+  clientId: "CLIENT_ID_BURAYA",
+  guildId: "GUILD_ID_BURAYA",
+}
 ```
 
-### Lint
+### Slash Komutlarını Kaydet
 
 ```bash
-npm run lint
+npx ts-node src/utils/registerCommands.ts
+```
+
+### Çalıştır
+
+```bash
+npx ts-node src/index.ts
 ```
 
 ---
@@ -80,11 +96,19 @@ npm run lint
 ```
 typescript-temp/
 ├── src/
-│   └── index.ts        # Giriş noktası
-├── tsconfig.json       # TypeScript yapılandırması
-├── .eslintrc.js        # ESLint yapılandırması
-├── .prettierrc         # Prettier yapılandırması
-└── package.json
+│   ├── commands/
+│   │   └── ping.ts                  # Örnek slash komutu
+│   ├── events/
+│   │   ├── interactionCreate.ts     # Etkileşim olayı
+│   │   └── ready.ts                 # Bot hazır olayı
+│   ├── utils/
+│   │   ├── registerCommands.ts      # Slash komut kayıt
+│   │   └── registerEvents.ts        # Event yükleyici
+│   ├── config.ts                    # Bot yapılandırması
+│   └── index.ts                     # Ana giriş noktası
+├── tsconfig.json
+├── package.json
+└── LICENSE
 ```
 
 ---
@@ -92,7 +116,7 @@ typescript-temp/
 ## 🤝 Katkıda Bulunma
 
 1. Repoyu fork'la
-2. Yeni dal oluştur
+2. Yeni dal oluştur (`git checkout -b ozellik/yeni-ozellik`)
 3. Değişiklikleri kaydet ve Pull Request aç
 
 ---
